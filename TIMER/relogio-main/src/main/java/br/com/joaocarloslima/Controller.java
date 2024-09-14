@@ -23,71 +23,71 @@ public class Controller implements Initializable {
     @FXML Slider sldSleepTimer;
     @FXML CheckBox chkRegresivo;
 
-    // private Timer timer;
+    private Timer timer;
 
     private int sleepTime = 1000;
 
-    // public void handleTextChange(){
-    //     if (txtMinutos.getText().isEmpty()) {
-    //         return;
-    //     }
-    //     timer.setTempo(Integer.parseInt(txtMinutos.getText()));
-    //     atualizar();
-    // }
+    public void handleTextChange(){
+        if (txtMinutos.getText().isEmpty()) {
+            return;
+        }
+        timer.setTempo(Integer.parseInt(txtMinutos.getText()));
+        atualizar();
+    }
 
-    // public void handleStart(){
-    //     timer.start();
-    //     atualizar();
-    // }
+    public void handleStart(){
+        timer.start();
+        atualizar();
+    }
     
-    // public void handleStop(){
-    //     timer.stop();
-    //     atualizar();
-    // }
+    public void handleStop(){
+        timer.stop();
+        atualizar();
+    }
 
-    // public void handleSleepTime(){
-    //     sleepTime = (int) sldSleepTimer.getValue();
-    // }
+    public void handleSleepTime(){
+        sleepTime = (int) sldSleepTimer.getValue();
+    }
 
-    // public void handleTick(){
+    public void handleTick(){
 
-    //     timer.tick();
-    //     atualizar();
-    // }
+        timer.tick();
+        atualizar();
+    }
 
-    // public void handleRegresivo(){
-    //     timer.regresivo = chkRegresivo.isSelected();
-    // }
+    public void handleRegresivo(){
+        timer.regresivo = chkRegresivo.isSelected();
+    }
 
-    // public void clockThread(){
-    //     Thread thread = new Thread(() -> {
-    //         while (true) {
-    //             try {
-    //                 Thread.sleep(sleepTime);
-    //                 Platform.runLater(() -> handleTick());
-    //             } catch (InterruptedException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         }
-    //     });
-    //     thread.setDaemon(true);
-    //     thread.start();
-    // }
+    public void clockThread(){
+        Thread thread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(sleepTime);
+                    Platform.runLater(() -> handleTick());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
+    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        // timer = new Timer(0);
-        // clockThread();
-        // atualizar();
+        timer = new Timer(0);
+        clockThread();
+        atualizar();
     }
 
-    // private void atualizar() {
-    //     lblHora.setText(timer.hora.getValorFormatado());
-    //     lblMinutos.setText(timer.minutos.getValorFormatado());
-    //     lblSegundos.setText(timer.segundos.getValorFormatado());
+    private void atualizar() {
+        lblHora.setText(timer.hora.getValorFormatado());
+        lblMinutos.setText(timer.minutos.getValorFormatado());
+        lblSegundos.setText(timer.segundos.getValorFormatado());
 
-    //     btnStart.setDisable(timer.ligado);
-    //     btnStop.setDisable(!timer.ligado);
-    // }
+        btnStart.setDisable(timer.ligado);
+        btnStop.setDisable(!timer.ligado);
+    }
 
 }
